@@ -17,6 +17,14 @@ https://gitter.im/ewels/MultiQC
 
 ---
 
+### When to write a plugin
+
+This example plugin contains both custom code and a MultiQC module for parsing content into reports.
+
+MultiQC modules can either be written as part of the core MultiQC program, or in a stand-alone plugin. If your module is for a publicly available tool, **please add it to the main program** and contribute your code via a pull request (see the [contributing instructions](https://github.com/ewels/MultiQC/blob/master/.github/CONTRIBUTING.md)).
+
+If your module is for something very niche, which no-one else can use, then it's best to write it as part of a custom plugin. The process is almost identical, though it keeps the code bases separate.
+
 ### Overview of files
 
 * `setup.py`
@@ -34,6 +42,17 @@ https://gitter.im/ewels/MultiQC
     * In this file, we define some new config defaults, including the search patterns used by the example module
 * `example_plugin/modules/my_example/`
     * This folder contains a minimal MultiQC module which will execute along with all other MultiQC modules (as defined by the `setup.py` hook).
+
+### Usage
+
+To use this code, you need to install MultiQC and then your code. For example:
+
+```bash
+pip install MultiQC
+python setup.py install
+```
+
+Use `python setup.py develop` if you're actively working on the code - then you don't need to rerun the installation every time you make an edit _(though you still do if you change anything in `setup.py`)_.
 
 ### Disabling the plugin
 
