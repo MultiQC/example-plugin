@@ -1,8 +1,5 @@
 # Example MultiQC Plugin
 
-![MultiQC](MultiQC_logo.png)
-![MultiQC Example](Example_logo.png)
-
 ### A miniature example of a MultiQC plugin
 
 This example repository contains the following code to help you get
@@ -13,6 +10,12 @@ http://multiqc.info/docs/#coding-with-multiqc
 
 If you have any questions, please get in touch on Gitter:
 https://gitter.im/ewels/MultiQC
+
+---
+
+![MultiQC](MultiQC_logo.png)
+
+---
 
 ### Overview of files
 
