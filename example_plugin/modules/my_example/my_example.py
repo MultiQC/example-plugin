@@ -27,12 +27,30 @@ class MultiqcModule(BaseMultiqcModule):
             target = "my_example",
             anchor = 'my_example',
             href = 'https://github.com/MultiQC/example-plugin',
-            info = " is an example module to show how the MultQC pluginm system works."
+            info = " is an example module to show how the MultiQC plugin system works."
         )
 
         # Find and load any input files for this module
         self.my_example_data = dict()
         for f in self.find_log_files('my_example/key_value_pairs'):
+            self.my_example_data[f['s_name']] = dict()
+            for l in f['f'].splitlines():
+                key, value = l.split(None, 1)
+                self.my_example_data[f['s_name']][key] = value
+
+        for f in self.find_log_files('my_example/mzml'):
+            self.my_example_data[f['s_name']] = dict()
+            for l in f['f'].splitlines():
+                key, value = l.split(None, 1)
+                self.my_example_data[f['s_name']][key] = value
+
+        for f in self.find_log_files('my_example/fragpipe'):
+            self.my_example_data[f['s_name']] = dict()
+            for l in f['f'].splitlines():
+                key, value = l.split(None, 1)
+                self.my_example_data[f['s_name']][key] = value
+
+        for f in self.find_log_files('my_example/fdr'):
             self.my_example_data[f['s_name']] = dict()
             for l in f['f'].splitlines():
                 key, value = l.split(None, 1)

@@ -41,6 +41,9 @@ def example_plugin_execution_start():
     # Add to the search patterns used by modules
     if 'my_example/key_value_pairs' not in config.sp:
         config.update_dict( config.sp, { 'my_example/key_value_pairs': { 'fn': 'my_plugin_output.tsv' } } )
+        config.update_dict( config.sp, { 'my_example/mzml': { 'fn': '*_mzml.csv' } } )
+        config.update_dict( config.sp, { 'my_example/fragpipe': { 'fn': '*_fragpipe.csv' } } )
+        config.update_dict( config.sp, { 'my_example/fdr': { 'fn': '*_fdr.csv' } } )
     if 'my_example/plot_data' not in config.sp:
         config.update_dict( config.sp, { 'my_example/plot_data': { 'fn': 'my_plugin_plotdata.tsv' } } )
 
