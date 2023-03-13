@@ -1,0 +1,14 @@
+general: file name	QEp21-5679_Chandra_723_OC_fdr.idXML
+general: file type	idXML
+general: database	/gne/data/protchem/metaproteomics/Databases/uniprot_reference_Mouse_Reverse.fasta
+general: database version	
+general: taxonomy	
+general: search engine	MSFragger	(version: )
+general: num. of runs	1
+general: num. of protein hits	4094
+general: num. of non-redundant protein hits (only hits that differ in the accession)	4094
+general: num. of matched spectra	29256
+general: num. of peptide hits	29256
+general: num. of modified top-hits	9329
+general: num. of non-redundant peptide hits (only hits that differ in sequence and/or modifications): 	20721
+meta: document ID	
