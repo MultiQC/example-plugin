@@ -41,20 +41,46 @@ class MultiqcModule(BaseMultiqcModule):
         for f in self.find_log_files("my_example/mzml"):
             self.my_example_data[f["s_name"]] = dict()
             for l in f["f"].splitlines():
-                key, value = l.split(None, 1)
-                self.my_example_data[f["s_name"]][key] = value
+                if "\t" not in l:
+                    continue
+                key, value = l.split("\t", 1)
+                if key in [
+                    "number of spectra",
+                    "total number of peaks",
+                    "number of MS1 spectra",
+                    "number of MS2 spectra",
+                ]:
+                    self.my_example_data[f["s_name"]][key] = value
 
         for f in self.find_log_files("my_example/search"):
             self.my_example_data[f["s_name"]] = dict()
             for l in f["f"].splitlines():
-                key, value = l.split(None, 1)
-                self.my_example_data[f["s_name"]][key] = value
+                if "\t" not in l:
+                    continue
+                key, value = l.split("\t", 1)
+                if key in [
+                    "general: num. of protein hits",
+                    "general: num. of matched spectra",
+                    "general: num. of modified top-hits",
+                    "general: num. of non-redundant peptide hits (only hits that differ in sequence and/or modifications): ",
+                ]:
+                    key = "search: " + key
+                    self.my_example_data[f["s_name"]][key] = value
 
         for f in self.find_log_files("my_example/fdr"):
             self.my_example_data[f["s_name"]] = dict()
             for l in f["f"].splitlines():
-                key, value = l.split(None, 1)
-                self.my_example_data[f["s_name"]][key] = value
+                if "\t" not in l:
+                    continue
+                key, value = l.split("\t", 1)
+                if key in [
+                    "general: num. of protein hits",
+                    "general: num. of matched spectra",
+                    "general: num. of modified top-hits",
+                    "general: num. of non-redundant peptide hits (only hits that differ in sequence and/or modifications): ",
+                ]:
+                    key = "fdr: " + key
+                    self.my_example_data[f["s_name"]][key] = value
 
         self.my_example_plot_data = dict()
         for f in self.find_log_files("my_example/plot_data"):
