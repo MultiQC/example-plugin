@@ -44,7 +44,7 @@ class MultiqcModule(BaseMultiqcModule):
                 key, value = l.split(None, 1)
                 self.my_example_data[f["s_name"]][key] = value
 
-        for f in self.find_log_files("my_example/fragpipe"):
+        for f in self.find_log_files("my_example/search"):
             self.my_example_data[f["s_name"]] = dict()
             for l in f["f"].splitlines():
                 key, value = l.split(None, 1)
