@@ -7,7 +7,7 @@ from collections import OrderedDict
 import logging
 
 from multiqc import config
-from multiqc.plots import linegraph
+from multiqc.plots import table, linegraph
 from multiqc.modules.base_module import BaseMultiqcModule
 
 # Initialise the main MultiQC logger
@@ -162,17 +162,149 @@ class MultiqcModule(BaseMultiqcModule):
 
         # Add a report section with the line plot
         self.add_section(
-            description="This plot shows some numbers, and how they relate.",
+            name="Identifications",
+            description="Summary statistics of peptide and protein identifications.",
             helptext="""
-            This longer description explains what exactly the numbers mean
-            and supports markdown formatting. This means that we can do _this_:
-
-            * Something important
-            * Something else important
-            * Best of all - some `code`
-
-            Doesn't matter if this is copied from documentation - makes it
-            easier for people to find quickly.
+            This section provides detailed information of the peptide and protein identifications.
+            
+            * straight out of the search engine
+            * after FDR filtering
+            * protein inference
             """,
             plot=line_plot_html,
+        )
+
+        # construct simple table for IDs
+        self.exp_design_table = dict()
+        x = dict()
+        x["A"] = float(10)
+        x["B"] = float(20)
+        self.exp_design_table["Fraction_Group"] = x
+        y = dict()
+        y["A"] = float(30)
+        y["B"] = float(40)
+        self.exp_design_table["Fraction"] = y
+        headers = OrderedDict()
+        headers["Fraction_Group"] = {
+            "description": "Fraction_Group",
+            "bgcols": "Rd",
+        }
+        headers["Fraction"] = {
+            "description": "Fraction identifier",
+            "bgcols": "Rd",
+        }
+
+        id_table = dict()
+        for sample, data in self.my_example_data.items():
+            print(sample + "  -->  ")
+            id_table[sample] = dict()
+
+            key = "search: general: num. of matched spectra"
+            if key in data:
+                id_table[sample]["PSMs before FDR"] = float(data[key])
+
+            key1 = "search: general: num. of matched spectra"
+            key2 = "number of MS2 spectra"
+            if (key1 in data) and (key2 in data):
+                id_table[sample]["mapping rate before FDR"] = (
+                    100 * float(data[key1]) / float(data[key2])
+                )
+
+            key = "search: general: num. of non-redundant peptide hits (only hits that differ in sequence and/or modifications): "
+            if key in data:
+                id_table[sample]["non-redundant peptide hits before FDR"] = data[key]
+
+            key = "search: general: num. of protein hits"
+            if key in data:
+                id_table[sample]["protein hits before FDR"] = data[key]
+
+            key1 = "fdr: general: num. of matched spectra"
+            key2 = "number of MS2 spectra"
+            if (key1 in data) and (key2 in data):
+                id_table[sample]["mapping rate after FDR"] = (
+                    100 * float(data[key1]) / float(data[key2])
+                )
+
+            key = "fdr: general: num. of matched spectra"
+            if key in data:
+                id_table[sample]["PSMs after FDR"] = data[key]
+
+            key = "fdr: general: num. of non-redundant peptide hits (only hits that differ in sequence and/or modifications): "
+            if key in data:
+                id_table[sample]["non-redundant peptide hits after FDR"] = data[key]
+
+            key = "fdr: general: num. of protein hits"
+            if key in data:
+                id_table[sample]["protein hits after FDR"] = data[key]
+
+            for key, value in data.items():
+                print("    **" + key + "**  -->  " + value)
+
+        headers = OrderedDict()
+        headers["PSMs before FDR"] = {
+            "title": "PSMs before FDR",
+            "description": "Number of peptide-spectrum-matches straight out of the search engine i.e. before false-discovery-rate filtering.",
+            "min": 0,
+            "scale": "RdGy",
+            "format": "{:,.0f}",
+        }
+        headers["mapping rate before FDR"] = {
+            "title": "mapping rate before FDR",
+            "description": "Number of peptide-spectrum-matches / number of MS2 spectra before false-discovery-rate filtering.",
+            "min": 0,
+            "scale": "RdGy",
+        }
+        headers["non-redundant peptide hits before FDR"] = {
+            "title": "non-redundant peptide hits before FDR",
+            "description": "Number of non-redundant peptide sequences (sequences which differ in sequence and/or modifications) before false-discovery-rate filtering.",
+            "min": 0,
+            "scale": "RdGy",
+            "format": "{:,.0f}",
+        }
+        headers["protein hits before FDR"] = {
+            "title": "protein hits before FDR",
+            "description": "Number of proteins which have one or multiple peptide hits before false-discovery-rate filtering.",
+            "min": 0,
+            "scale": "RdGy",
+            "format": "{:,.0f}",
+        }
+        headers["PSMs after FDR"] = {
+            "title": "PSMs after FDR",
+            "description": "Number of peptide-spectrum-matches straight out of the search engine i.e. after false-discovery-rate filtering.",
+            "min": 0,
+            "scale": "RdYlGn",
+            "format": "{:,.0f}",
+        }
+        headers["mapping rate after FDR"] = {
+            "title": "mapping rate after FDR",
+            "description": "Number of peptide-spectrum-matches / number of MS2 spectra after false-discovery-rate filtering.",
+            "min": 0,
+            "scale": "RdYlGn",
+        }
+        headers["non-redundant peptide hits after FDR"] = {
+            "title": "non-redundant peptide hits after FDR",
+            "description": "Number of non-redundant peptide sequences (sequences which differ in sequence and/or modifications) after false-discovery-rate filtering.",
+            "min": 0,
+            "scale": "RdYlGn",
+            "format": "{:,.0f}",
+        }
+        headers["protein hits after FDR"] = {
+            "title": "protein hits after FDR",
+            "description": "Number of proteins which have one or multiple peptide hits after false-discovery-rate filtering.",
+            "min": 0,
+            "scale": "RdYlGn",
+            "format": "{:,.0f}",
+        }
+
+        self.add_section(
+            name="Identifications",
+            description="Summary statistics of peptide and protein identifications.",
+            helptext="""
+            This section provides detailed information of the peptide and protein identifications.
+
+            * straight out of the search engine
+            * after FDR filtering
+            * protein inference
+            """,
+            plot=table.plot(id_table, headers),
         )
