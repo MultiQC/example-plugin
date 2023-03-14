@@ -7,7 +7,7 @@ from collections import OrderedDict
 import logging
 
 from multiqc import config
-from multiqc.plots import table, linegraph
+from multiqc.plots import table
 from multiqc.modules.base_module import BaseMultiqcModule
 
 # Initialise the main MultiQC logger
@@ -23,20 +23,15 @@ class MultiqcModule(BaseMultiqcModule):
 
         # Initialise the parent module Class object
         super(MultiqcModule, self).__init__(
-            name="My Example",
-            target="my_example",
+            name="Metaproteomics",
+            target="multiqc_metaprot",
             anchor="my_example",
             href="https://github.com/MultiQC/example-plugin",
-            info=" is an example module to show how the MultiQC plugin system works.",
+            info=" is a module for the generation of quality control reports for the Genentech metaproteomics pipeline.",
         )
 
         # Find and load any input files for this module
         self.my_example_data = dict()
-        for f in self.find_log_files("my_example/key_value_pairs"):
-            self.my_example_data[f["s_name"]] = dict()
-            for l in f["f"].splitlines():
-                key, value = l.split(None, 1)
-                self.my_example_data[f["s_name"]][key] = value
 
         for f in self.find_log_files("my_example/mzml"):
             if f["s_name"] not in self.my_example_data:
@@ -151,52 +146,9 @@ class MultiqcModule(BaseMultiqcModule):
         }
         self.general_stats_addcols(self.my_example_data, headers)
 
-        # Create line plot
-        pconfig = {
-            "id": "my_example_plot",
-            "title": "My Example: An example plot",
-            "ylab": "# Other Things",
-            "xlab": "Some Values",
-        }
-        line_plot_html = linegraph.plot(self.my_example_plot_data, pconfig)
-
-        # Add a report section with the line plot
-        self.add_section(
-            name="Identifications",
-            description="Summary statistics of peptide and protein identifications.",
-            helptext="""
-            This section provides detailed information of the peptide and protein identifications.
-            
-            * straight out of the search engine
-            * after FDR filtering
-            * protein inference
-            """,
-            plot=line_plot_html,
-        )
-
-        # construct simple table for IDs
-        self.exp_design_table = dict()
-        x = dict()
-        x["A"] = float(10)
-        x["B"] = float(20)
-        self.exp_design_table["Fraction_Group"] = x
-        y = dict()
-        y["A"] = float(30)
-        y["B"] = float(40)
-        self.exp_design_table["Fraction"] = y
-        headers = OrderedDict()
-        headers["Fraction_Group"] = {
-            "description": "Fraction_Group",
-            "bgcols": "Rd",
-        }
-        headers["Fraction"] = {
-            "description": "Fraction identifier",
-            "bgcols": "Rd",
-        }
-
+        # construct data table for IDs
         id_table = dict()
         for sample, data in self.my_example_data.items():
-            print(sample + "  -->  ")
             id_table[sample] = dict()
 
             key = "search: general: num. of matched spectra"
@@ -237,9 +189,7 @@ class MultiqcModule(BaseMultiqcModule):
             if key in data:
                 id_table[sample]["protein hits after FDR"] = data[key]
 
-            for key, value in data.items():
-                print("    **" + key + "**  -->  " + value)
-
+        # construct headers for ID table
         headers = OrderedDict()
         headers["PSMs before FDR"] = {
             "title": "PSMs before FDR",
@@ -302,9 +252,8 @@ class MultiqcModule(BaseMultiqcModule):
             helptext="""
             This section provides detailed information of the peptide and protein identifications.
 
-            * straight out of the search engine
+            * straight out of the search engine i.e. before FDR filtering
             * after FDR filtering
-            * protein inference
             """,
             plot=table.plot(id_table, headers),
         )

@@ -1,0 +1,28 @@
+general: file name	20230216_Lum1_3h_G3_D_Cel_Co4.mzML
+general: file type	mzML
+number of spectra	94129
+total number of peaks	21869312
+general: ranges: retention time: min	0.00
+general: ranges: retention time: max	11100.26
+general: ranges: mass-to-charge: min	0.00
+general: ranges: mass-to-charge: max	1999.93
+general: ranges: intensity: min	680.79
+general: ranges: intensity: max	1533441152.00
+number of MS1 spectra	6493
+number of MS2 spectra	87636
+peak type metadata [annotation, estimate]	Centroid	Centroid
+peak type metadata [annotation, estimate]	Centroid	Centroid
+activation methods (mslevel, method, count)	2	HCD	87636
+general: charge distribution: charge: 2	60519
+general: charge distribution: charge: 3	24739
+general: charge distribution: charge: 4	2378
+number of chromatograms	2
+number of chromatographic peaks	316527
+document id	
+date	2023-02-18 12:50:34
+sample name	
+sample organism	
+sample comment	
+instrument name	Orbitrap Fusion Lumos
+instrument model	
+instrument vendor	

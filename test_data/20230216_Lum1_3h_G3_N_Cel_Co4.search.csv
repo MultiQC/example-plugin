@@ -1,0 +1,14 @@
+general: file name	20230216_Lum1_3h_G3_N_Cel_Co4_indexed.idXML
+general: file type	idXML
+general: database	/gne/data/protchem/metaproteomics/Databases/metaproteome_Mouse_Reverse.fasta
+general: database version	
+general: taxonomy	
+general: search engine	MSFragger	(version: )
+general: num. of runs	1
+general: num. of protein hits	106960
+general: num. of non-redundant protein hits (only hits that differ in the accession)	106960
+general: num. of matched spectra	14117
+general: num. of peptide hits	14117
+general: num. of modified top-hits	3320
+general: num. of non-redundant peptide hits (only hits that differ in sequence and/or modifications): 	9280
+meta: document ID	
