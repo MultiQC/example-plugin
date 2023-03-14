@@ -114,6 +114,41 @@ class MultiqcModule(BaseMultiqcModule):
             "scale": "RdYlGn-rev",
             "format": "{:,.0f}",
         }
+        headers["number of spectra"] = {
+            "title": "spectra",
+            "description": "Total number of MS1 and MS2 spectra.",
+            "min": 0,
+            "scale": "RdBu",
+            "format": "{:,.0f}",
+        }
+        headers["total number of peaks"] = {
+            "title": "peaks",
+            "description": "Total number of peaks in all MS1 and MS2 spectra.",
+            "min": 0,
+            "scale": "RdBu",
+            "format": "{:,.0f}",
+        }
+        headers["number of MS1 spectra"] = {
+            "title": "MS1 spectra",
+            "description": "Number of MS1 spectra.",
+            "min": 0,
+            "scale": "RdGy",
+            "format": "{:,.0f}",
+        }
+        headers["number of MS2 spectra"] = {
+            "title": "MS2 spectra",
+            "description": "Number of MS2 spectra.",
+            "min": 0,
+            "scale": "RdGy",
+            "format": "{:,.0f}",
+        }
+        headers["fdr: general: num. of matched spectra"] = {
+            "title": "PSMs",
+            "description": "Number of peptide-spectrum-matches after false-discovery-rate filtering.",
+            "min": 0,
+            "scale": "RdYlGn",
+            "format": "{:,.0f}",
+        }
         self.general_stats_addcols(self.my_example_data, headers)
 
         # Create line plot
