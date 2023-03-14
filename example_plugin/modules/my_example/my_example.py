@@ -39,7 +39,8 @@ class MultiqcModule(BaseMultiqcModule):
                 self.my_example_data[f["s_name"]][key] = value
 
         for f in self.find_log_files("my_example/mzml"):
-            self.my_example_data[f["s_name"]] = dict()
+            if f["s_name"] not in self.my_example_data:
+                self.my_example_data[f["s_name"]] = dict()
             for l in f["f"].splitlines():
                 if "\t" not in l:
                     continue
@@ -53,7 +54,8 @@ class MultiqcModule(BaseMultiqcModule):
                     self.my_example_data[f["s_name"]][key] = value
 
         for f in self.find_log_files("my_example/search"):
-            self.my_example_data[f["s_name"]] = dict()
+            if f["s_name"] not in self.my_example_data:
+                self.my_example_data[f["s_name"]] = dict()
             for l in f["f"].splitlines():
                 if "\t" not in l:
                     continue
@@ -68,7 +70,8 @@ class MultiqcModule(BaseMultiqcModule):
                     self.my_example_data[f["s_name"]][key] = value
 
         for f in self.find_log_files("my_example/fdr"):
-            self.my_example_data[f["s_name"]] = dict()
+            if f["s_name"] not in self.my_example_data:
+                self.my_example_data[f["s_name"]] = dict()
             for l in f["f"].splitlines():
                 if "\t" not in l:
                     continue
