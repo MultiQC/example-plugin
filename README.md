@@ -13,7 +13,13 @@ https://gitter.im/ewels/MultiQC
 
 ---
 
-![MultiQC](MultiQC_logo.png)
+<h1>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://github.com/MultiQC/MultiQC/raw/main/docs/images/MultiQC_logo_darkbg.png">
+  <source media="(prefers-color-scheme: light)" srcset="https://github.com/MultiQC/MultiQC/raw/main/docs/images/MultiQC_logo.png">
+  <img src="https://github.com/MultiQC/MultiQC/raw/main/docs/images/MultiQC_logo.png" alt="MultiQC">
+</picture>
+</h1>
 
 ---
 
@@ -27,8 +33,8 @@ If your module is for something very niche, which no-one else can use, then it's
 
 ### Overview of files
 
-* `setup.py`
-    * Where the `setuptools` plugin hooks are defined. This is where you tell MultiQC where to find your code.
+* `pyproject.toml`
+    * Where the plugin hooks are defined. This is where you tell MultiQC where to find your code.
     * This file also defines how your plugin should be installed, including required python packages.
 * `example_plugin/`
     * Installable Python packages are typically put into a directory with the same name.
@@ -49,10 +55,10 @@ To use this code, you need to install MultiQC and then your code. For example:
 
 ```bash
 pip install MultiQC
-python setup.py install
+pip install .
 ```
 
-Use `python setup.py develop` if you're actively working on the code - then you don't need to rerun the installation every time you make an edit _(though you still do if you change anything in `setup.py`)_.
+Use `pip install -e .` if you're actively working on the code - then you don't need to rerun the installation every time you make an edit _(though you still do if you change anything in `pyproject.toml`)_.
 
 ### Disabling the plugin
 
