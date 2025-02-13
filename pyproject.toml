@@ -1,0 +1,56 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "multiqc_example_plugin"
+version = "0.2"
+authors = [
+    {name = "Phil Ewels", email = "phil.ewels@seqera.io"},
+    {name = "Vlad Savelyev", email = "vladislav.savelyev@seqera.io"},
+]
+description = "Example MultiQC plugin"
+readme = "README.md"
+license = {file = "LICENSE"}
+keywords = ["bioinformatics", "biology", "sequencing", "NGS", "next generation sequencing", "quality control"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Console",
+    "Environment :: Web Environment",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Natural Language :: English",
+    "Operating System :: MacOS :: MacOS X",
+    "Operating System :: POSIX",
+    "Operating System :: Unix",
+    "Programming Language :: Python",
+    "Programming Language :: JavaScript",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
+    "Topic :: Scientific/Engineering :: Visualization",
+]
+
+[tool.setuptools]
+packages = ["example_plugin"]
+
+[project.urls]
+Repository = "https://github.com/MultiQC/example-plugin"
+
+[project.entry-points."multiqc.modules.v1"]
+my_example = "example_plugin.modules.my_example:MultiqcModule"
+
+[project.entry-points."multiqc.cli_options.v1"]
+disable_plugin = "example_plugin.cli:disable_plugin"
+
+[project.entry-points."multiqc.hooks.v1"]
+execution_start = "example_plugin.custom_code:example_plugin_execution_start"
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+ignore-init-module-imports = true
+ignore = ["F401"]  # unused-import
+
+[tool.mypy]
+check_untyped_defs = true
+plugins = ["pydantic.mypy"]
