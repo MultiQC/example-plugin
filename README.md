@@ -1,25 +1,21 @@
 # Example MultiQC Plugin
 
-### A miniature example of a MultiQC plugin
-
-This example repository contains the following code to help you get
-started with writing your own MultiQC plugin.
+This example repository contains example code to help you get started with writing your own MultiQC plugin.
 
 It should be used in addition to the main MultiQC documentation:
-http://multiqc.info/docs/#coding-with-multiqc
+[https://docs.seqera.io/multiqc/](https://docs.seqera.io/multiqc/development/plugins)
 
-If you have any questions, please get in touch on Gitter:
-https://gitter.im/ewels/MultiQC
+If you have any questions, please get in touch on the community forum:
+[https://community.seqera.io/multiqc](https://community.seqera.io/multiqc)
 
----
-
-<h1>
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://github.com/MultiQC/MultiQC/raw/main/docs/images/MultiQC_logo_darkbg.png">
-  <source media="(prefers-color-scheme: light)" srcset="https://github.com/MultiQC/MultiQC/raw/main/docs/images/MultiQC_logo.png">
-  <img src="https://github.com/MultiQC/MultiQC/raw/main/docs/images/MultiQC_logo.png" alt="MultiQC">
-</picture>
-</h1>
+<p align="center">
+  <a href="https://seqera.io/multiqc/">
+    <picture>
+        <source media="(prefers-color-scheme: dark)" width="350" srcset="https://github.com/seqeralabs/logos/blob/master/multiqc/multiqc_logo_color_darkbg.png?raw=true">
+        <img alt="Nextflow Logo" width="350" src="https://github.com/seqeralabs/logos/blob/master/multiqc/multiqc_logo_color.png?raw=true">
+    </picture>
+  </a>
+</p>
 
 ---
 
@@ -27,7 +23,7 @@ https://gitter.im/ewels/MultiQC
 
 This example plugin contains both custom code and a MultiQC module for parsing content into reports.
 
-MultiQC modules can either be written as part of the core MultiQC program, or in a stand-alone plugin. If your module is for a publicly available tool, **please add it to the main program** and contribute your code via a pull request (see the [contributing instructions](https://github.com/ewels/MultiQC/blob/master/.github/CONTRIBUTING.md)).
+MultiQC modules can either be written as part of the core MultiQC program, or in a stand-alone plugin. If your module is for a publicly available tool, **please add it to the main program** and contribute your code via a pull request (see the [contributing instructions](https://github.com/MultiQC/MultiQC/blob/master/.github/CONTRIBUTING.md)).
 
 If your module is for something very niche, which no-one else can use, then it's best to write it as part of a custom plugin. The process is almost identical, though it keeps the code bases separate.
 
@@ -53,7 +49,7 @@ If your module is for something very niche, which no-one else can use, then it's
 
 To use this code, you need to install MultiQC and then your code. For example:
 
-```bash
+```
 pip install MultiQC
 pip install .
 ```
