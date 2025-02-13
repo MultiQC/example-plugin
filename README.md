@@ -1,8 +1,5 @@
 # Example MultiQC Plugin
 
-
-
-
 This example repository contains example code to help you get started with writing your own MultiQC plugin.
 
 It should be used in addition to the main MultiQC documentation:
